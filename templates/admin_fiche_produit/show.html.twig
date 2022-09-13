@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FicheProduit{% endblock %}
+
+{% block body %}
+    <h1>FicheProduit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fiche_produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ fiche_produit.nom }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ fiche_produit.type }}</td>
+            </tr>
+            <tr>
+                <th>Format</th>
+                <td>{{ fiche_produit.format }}</td>
+            </tr>
+            <tr>
+                <th>Pellicule</th>
+                <td>{{ fiche_produit.pellicule }}</td>
+            </tr>
+            <tr>
+                <th>Mesure</th>
+                <td>{{ fiche_produit.mesure }}</td>
+            </tr>
+            <tr>
+                <th>Autofocus</th>
+                <td>{{ fiche_produit.autofocus }}</td>
+            </tr>
+            <tr>
+                <th>Iso</th>
+                <td>{{ fiche_produit.iso }}</td>
+            </tr>
+            <tr>
+                <th>Obturation</th>
+                <td>{{ fiche_produit.obturation }}</td>
+            </tr>
+            <tr>
+                <th>Poids</th>
+                <td>{{ fiche_produit.poids }}</td>
+            </tr>
+            <tr>
+                <th>Dimension</th>
+                <td>{{ fiche_produit.dimension }}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td>{{ fiche_produit.couleur }}</td>
+            </tr>
+            <tr>
+                <th>Flash</th>
+                <td>{{ fiche_produit.flash }}</td>
+            </tr>
+            <tr>
+                <th>Amplificateur</th>
+                <td>{{ fiche_produit.amplificateur }}</td>
+            </tr>
+            <tr>
+                <th>HautParleur</th>
+                <td>{{ fiche_produit.hautParleur }}</td>
+            </tr>
+            <tr>
+                <th>Equaliseur</th>
+                <td>{{ fiche_produit.equaliseur }}</td>
+            </tr>
+            <tr>
+                <th>Impedance</th>
+                <td>{{ fiche_produit.impedance }}</td>
+            </tr>
+            <tr>
+                <th>Rendement</th>
+                <td>{{ fiche_produit.rendement }}</td>
+            </tr>
+            <tr>
+                <th>Pavillon</th>
+                <td>{{ fiche_produit.pavillon }}</td>
+            </tr>
+            <tr>
+                <th>Filtre</th>
+                <td>{{ fiche_produit.filtre }}</td>
+            </tr>
+            <tr>
+                <th>Vitesse</th>
+                <td>{{ fiche_produit.vitesse }}</td>
+            </tr>
+            <tr>
+                <th>Cellule</th>
+                <td>{{ fiche_produit.cellule }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_fiche_produit_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_fiche_produit_edit', {'id': fiche_produit.id}) }}">edit</a>
+
+    {{ include('admin_fiche_produit/_delete_form.html.twig') }}
+{% endblock %}

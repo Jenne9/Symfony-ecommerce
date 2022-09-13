@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ asset('css/backend.css') }}">
+        {% block stylesheets %}{% endblock %}
+        
+    </head>
+
+    <body class="text-dark bg-light">
+		<div class="wrapper">
+			<nav id="sidebar" class="sidebar js-sidebar">
+				<div class="sidebar-content js-simplebar">
+					<a class="sidebar-brand" href="index.html"><span class="align-middle">IKAL - Dashboard</span></a>
+
+					<ul class="sidebar-nav">						
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ path('app_front_accueil') }}" target="_blanck" >
+								<i class="align-middle" data-feather="globe"></i>
+								<span class="align-middle">
+									Voir le site
+								</span>
+							</a>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link"  href="{{ path('app_admin_dashboard') }}">
+								<i class="align-middle" data-feather="sliders"></i>
+								<span class="align-middle">
+									Dashboard
+								</span>
+							</a>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ path('app_admin_categorie_index') }}">
+								<i class="align-middle" data-feather="home"></i>
+								<span class="align-middle">
+									Categorie
+								</span>
+							</a>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ path('app_admin_fiche_produit_index') }}">
+								<i class="align-middle" data-feather="home"></i>
+								<span class="align-middle">
+									Fiche Produit
+								</span>
+							</a>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ path('app_admin_marque_index') }}">
+								<i class="align-middle" data-feather="home"></i>
+								<span class="align-middle">
+									Marque
+								</span>
+							</a>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ path('app_admin_produit_index') }}">
+								<i class="align-middle" data-feather="home"></i>
+								<span class="align-middle">
+									Produit
+								</span>
+							</a>
+						</li>						
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ path('app_admin_transporteur_index') }}">
+								<i class="align-middle" data-feather="home"></i>
+								<span class="align-middle">
+									Transporteur
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+			</nav>
+			<div class="main">
+				<nav class="navbar navbar-expand navbar-light navbar-bg">
+					<a class="sidebar-toggle js-sidebar-toggle">
+						<i class="hamburger align-self-center"></i>
+					</a>
+
+					<div class="navbar-collapse collapse">
+						<ul class="navbar-nav navbar-align">
+							<li class="nav-item dropdown">
+								<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+									<i class="align-middle" data-feather="settings"></i>
+								</a>
+								<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+									<span class="text-dark">Administrateur</span>
+								</a>   
+							</li>
+						</ul>
+					</div>
+				</nav>
+
+				<main class="content">
+					<div class="container-fluid p-0">
+				{% block body %}{% endblock %}
+					</div>
+				</main>
+
+				<footer class="footer">
+					<div class="container-fluid"></div>
+				</footer>
+			</div>
+		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		{% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FicheProduit index{% endblock %}
+
+{% block body %}
+    <h1>FicheProduit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Format</th>
+                <th>Pellicule</th>
+                <th>Mesure</th>
+                <th>Autofocus</th>
+                <th>Iso</th>
+                <th>Obturation</th>
+                <th>Poids</th>
+                <th>Dimension</th>
+                <th>Couleur</th>
+                <th>Flash</th>
+                <th>Amplificateur</th>
+                <th>HautParleur</th>
+                <th>Equaliseur</th>
+                <th>Impedance</th>
+                <th>Rendement</th>
+                <th>Pavillon</th>
+                <th>Filtre</th>
+                <th>Vitesse</th>
+                <th>Cellule</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche_produit in fiche_produits %}
+            <tr>
+                <td>{{ fiche_produit.id }}</td>
+                <td>{{ fiche_produit.nom }}</td>
+                <td>{{ fiche_produit.type }}</td>
+                <td>{{ fiche_produit.format }}</td>
+                <td>{{ fiche_produit.pellicule }}</td>
+                <td>{{ fiche_produit.mesure }}</td>
+                <td>{{ fiche_produit.autofocus }}</td>
+                <td>{{ fiche_produit.iso }}</td>
+                <td>{{ fiche_produit.obturation }}</td>
+                <td>{{ fiche_produit.poids }}</td>
+                <td>{{ fiche_produit.dimension }}</td>
+                <td>{{ fiche_produit.couleur }}</td>
+                <td>{{ fiche_produit.flash }}</td>
+                <td>{{ fiche_produit.amplificateur }}</td>
+                <td>{{ fiche_produit.hautParleur }}</td>
+                <td>{{ fiche_produit.equaliseur }}</td>
+                <td>{{ fiche_produit.impedance }}</td>
+                <td>{{ fiche_produit.rendement }}</td>
+                <td>{{ fiche_produit.pavillon }}</td>
+                <td>{{ fiche_produit.filtre }}</td>
+                <td>{{ fiche_produit.vitesse }}</td>
+                <td>{{ fiche_produit.cellule }}</td>
+                <td>
+                    <a href="{{ path('app_admin_fiche_produit_show', {'id': fiche_produit.id}) }}">show</a>
+                    <a href="{{ path('app_admin_fiche_produit_edit', {'id': fiche_produit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="23">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_fiche_produit_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+    {% block scriptStripe %}
+    <script src="https://js.stripe.com/v3/"></script>
+    {% endblock %}
+{% block body %}
+<div class="section">
+	<div class="container bg-white text-dark">
+        
+        <div class="row">
+        	<div class="col-md-6 px-5">
+                <div class="heading_s1 pt-5">
+                        <h4 class="text-center">Vérifier votre adresse de livraison</h4>
+                        <div class="content">
+                            {{ adresse | replace ({'[spr]' : '<br>'})|raw }}
+                            <a class="nav-link"href="{{path ('app_adresse_edit', {'id':adresse.id})}}">Modifier</a>
+                            <a class="nav-link"href="{{path ('app_paiement_modifier')}}">Changer</a>
+                        </div>                   
+                </div>
+                <div class="heading_s1 pt-3">
+                    <h4 class="text-center">Vérifier votre transporteur</h4>
+                    <div class="content pb-2">
+                        {{ transporteur | replace ({'[spr]' : '<br>'})|raw }}
+                        <a class="nav-link"href="{{path ('app_paiement_modifier')}}">Changer</a>
+                    </div>
+                </div>
+                {% if information %}
+                    <div class="heading_s1 pt-3 pb-5">
+                        <h4 class="text-center">Vérifier vos informations</h4>
+                        <div class="form-group mb-0">
+                            {{ information }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6">
+                <div class="order_review">
+                    <div class="heading_s1 pt-5 pb-3">
+                        <h4 class="text-center">Commande</h4>
+                    </div>
+                    <div class="table-responsive order_table ">
+                        <table class="table bg-light ">
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        
+							{% for element in panier.produits %}
+							
+                                    <tr>
+                                        <td> {{element.produit.nom}} <span class="ps-3">X{{element.quantity}}</span></td>                                       
+                                        <td>{{element.produit.prix}} €</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total HT</th>
+                                    <td class="product-subtotal">{{panier.data.sousTotalHT}} €</td>
+                                </tr>
+                                <tr>
+                                <th>Frais de port ({{transporteur.nom}})</th>
+                                    <td class="product-subtotal">{{transporteur.prix}} €</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>TVA</th>
+                                    <td class="product-subtotal">{{ panier.data.tva}} €</td>
+                                </tr>
+                                <tr>
+                                    <th>Total</th>
+                                    <td class="product-subtotal">{{ panier.data.sousTotalHT +  panier.data.tva + transporteur.prix}} €</td>
+                                </tr>
+                            </tfoot>
+                        
+                        </table>
+                    </div>
+                    <div class="payment_method">
+                        <div class="heading_s1">
+                            <h4>Paiement</h4>
+                        </div>
+                        <form action="/create-checkout-session" method="POST">
+                            <button type="submit" id="checkout-button" class="btn btn-warning">Payer | {{ panier.data.sousTotalHT +  panier.data.tva + transporteur.prix }} €</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var Stripe = Stripe('pk_test_51LcEltBP88TJivThLULhC9crBN2CoDjonTscMg5XBIQOhfUHYvzggdmD2BPUZqykZQYi7wMjkvME5jYSGUPb6lqk009QycMyA9')
+        var checkoutButton = document.getElementById("checkout-button");
+
+        checkoutButton.addEvenListener("click", function() {
+            fetch("/create-checkout-session", {
+                method: "POST",
+            )}
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(session){
+                return stripe.redirectToCheckout({ sessionId: session.id});
+            })
+            .then(function(result){
+                if (result.error){
+                    alert(result.error.message);
+                    }
+            })
+            .catch(function(error){
+                console.error("Error", error);
+            });
+        });
+
+    </script>
+
+{% endblock %}

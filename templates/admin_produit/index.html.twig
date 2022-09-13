@@ -1,0 +1,64 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('app_admin_produit_new') }}" class="btn btn-dark my-3">Nouveau</a>
+
+    <h1>Produit</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Marque</th>      
+                <th>Nom</th>
+                <th>Categorie</th> 
+                <th>Prix</th>
+                <th>Quantite</th>
+                <th>Nouveauté</th>
+                <th>Photo</th>
+                <th>Mise à jour</th>
+                {# <th>Description</th> #}
+                {# <th>Slug</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.marque.nom }}</td>
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.categorie.nom }}</td>
+                <td>{{ produit.prix }} €</td>
+                <td>{{ produit.quantite }}</td>
+                <td>{{ produit.isNew }}</td>
+                {# <td>{{ produit.description|raw }}</td> #}
+                {# <td>{{ produit.slug }}</td> #}
+                <td>{% if produit.imageName is defined and produit.imageName is not null %}
+                        <img src="{{ asset('images/produits/' ~ produit.imageName )}}" style="max-width:100px;" class="img-list">
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+
+                <td>{{ produit.updatedAt ? produit.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+                <td class="text-end">
+                    <a href="{{ path('app_admin_produit_show', {'id': produit.id}) }}"title="Voir" class="btn btn-dark">
+                        <i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}"title="Modifier" class="btn btn-success ms-2">
+                        <i class="align-middle" data-feather="edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucun produit trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

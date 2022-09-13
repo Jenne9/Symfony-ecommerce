@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+	<main class="container bg-white">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                	<table class="table ">
+                    	<thead>
+                        	<tr>
+                            	<th>&nbsp;</th>
+								<th>Marque</th>
+                                <th>Produit</th>
+                                <th>Prix</th>
+                                <th class="ps-5">Quantité</th>
+                                <th>Total</th>
+                                <th>Supprimer</th>
+                            </tr>
+                        </thead>
+
+						<tbody>							
+							{% for element in panier.produits %}							
+							<tr>
+								<td><img class="img-fluid" style="width:200px;" src="{{asset ('images/produits/') ~ element.produit.imageName}}" alt="{{element.produit.nom}}"></td>
+								<td class="pt-5">{{element.produit.marque}}</td>
+								<td class="pt-5">{{element.produit.nom}}</td>
+								<td class="pt-5">{{element.produit.prix }}€ </td>
+								<td class="pt-5">
+									<div class="">
+										<a href="{{path ('app_panier_suppression', {'id':element.produit.id})}}"type="button" value="-" class="text-decoration-none text-dark bg-opacity-10 bg-dark rounded-circle text-center p-1 ps-2 me-1"> - </a>
+										<input type="text" name="quantite" value="{{element.quantity}}" class="text-center" size="4">
+										<a href="{{path ('app_panier_ajout', {'id':element.produit.id})}}" type="button" value="+" class="text-decoration-none text-dark bg-opacity-10 bg-dark rounded-circle text-center p-1 px-2 ms-1"> + </a>
+									</div>
+								</td>
+								<td class="pt-5">{{element.produit.prix * element.quantity}} €</td>
+								<td class="pt-5"><a class="nav-link ms-4 text-danger"href="{{path ('app_panier_suppression_item', {'id':element.produit.id})}}"><i class="fa-solid fa-xmark"></i></a></td>
+							</tr>
+							{% endfor %}
+                        </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+    	<div class="row text-dark">
+        	<div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+            	<div class="border mb-3 p-3 p-md-4">
+                    <div class="mb-3">
+                        <h6>Total du panier</h6>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Panier HT</td>
+                                    <td>{{ panier.data.sousTotalHT }} €</td>
+                                </tr>
+								<tr>
+									<td>TVA (20%) </td>
+									<td>{{ panier.data.tva}} €</td>
+								</tr>
+                                {# <tr>
+                                    <td>Frais de port</td>
+                                    <td></td>
+                                </tr> #}
+                                <tr>
+                                    <td>Total TTC</td>
+                                    <td><strong>{{ panier.data.sousTotalTTC }} €</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{{ path ('app_paiement') }}" class="btn btn-success ">Passer au réglement</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.marque) }}
+    {{ form_row(form.categorie) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.quantite) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.imageFile) }}
+    {{ form_row(form.slug) }}
+        <button class="btn btn-dark" id="bt-fiche-produit">Ajouter une fiche</button>
+    {# {{ form_row(form.ficheProduit, { attr: {"class": "d-none"}}) }} #}
+    
+    <button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

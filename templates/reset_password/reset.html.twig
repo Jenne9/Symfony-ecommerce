@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié ?{% endblock %}
+
+{% block body %}
+
+
+<div class="login_register_wrap section">
+    <div class="container text-dark">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-10">
+                <div class="login_wrap">
+                    <div class="bg-white mt-5 px-5 py-3">
+                        <div class="heading_s1 pt-3 text-center">
+                        <h3>Réinitialisation mot de passe</h3>
+                    </div>
+                    <div class="content">
+                        {{ form_start(resetForm) }}
+                        {{ form_row(resetForm.plainPassword, {'attr':{'class':'form-control'}}) }}
+                        <button class="btn btn-warning">Réinitialiser mot de passe</button>
+                        {{ form_end(resetForm) }}
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

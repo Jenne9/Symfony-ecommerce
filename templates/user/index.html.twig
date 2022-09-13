@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ app.user.nom | upper }} {{ app.user.prenom | upper }}{% endblock %}
+{% block body %}
+<div class="row text-dark justify-content-center mt-5">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h3 class="text-center">Bonjour {{ app.user.nom | upper }} {{ app.user.prenom | upper }}</h3>
+            </div>
+            <div class="card-body bg-light text-center">
+                <p> Nom : {{ app.user.nom | upper }}</p>
+                <p> Prénom : {{ app.user.prenom | upper }} </p>
+                <p> Email : {{ app.user.email }}</p>                
+                <a href="{{ path('app_user_profil_modifier') }}" class="btn btn-success my-2 me-2">Modifier le profil</a>
+                <a href="{{ path('app_user_password_modifier') }}" class="btn btn-success my-2">Modifier le mot de passe</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-dark justify-content-center my-5">
+    <div class="col-md-10">
+        <div class="card col-sm-12">
+            <div class="card-header bg-warning text-center text-dark mb-3"><h3>Mes Adresses</h3></div>
+                <div class="row text-dark justify-content-center">
+                    <div class="col-sm-1 col-md-4 col-md-8 col-lg-9 d-flex flex-wrap justify-content-center">
+                    {% for adresse in app.user.adresses %}
+                        <div class="card mx-2 mb-5">
+                            <div class="card-header text-center">{{ adresse.nom }}</div>
+                            <div class="card-body d-flex">
+                                <a class="nav-link me-3" href="{{ path('app_adresse_show', {'id': adresse.id}) }}">Voir</a>
+                                <a class="nav-link " href="{{ path('app_adresse_edit', {'id': adresse.id}) }}">Modifier</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mb-2">
+                    <a href="{{ path('app_adresse_new') }}" class="btn btn-success"> Ajouter une adresse</a>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-dark justify-content-center my-5">
+    <div class="col-md-10">
+        <div class="card col-sm-12">
+            <div class="card-header bg-warning text-center text-dark mb-3"><h3>Mes Commandes</h3></div>
+                <div class="row text-dark justify-content-center">
+                    <div class="col-sm-1 col-md-4 col-md-8 col-lg-9 d-flex flex-wrap justify-content-center">                    
+                        <div class="card mx-2 mb-5">
+                            <div class="card-header text-center">Nikon S2</div>
+                            <div class="card-body d-flex">
+                                <a class="nav-link me-3" href="#">Voir</a>
+                                <a class="nav-link " href="#">Modifier</a>
+                            </div>
+                        </div>
+                        <div class="card mx-2 mb-5">
+                            <div class="card-header text-center">Victrola 102</div>
+                            <div class="card-body d-flex">
+                                <a class="nav-link me-3" href="#">Voir</a>
+                                <a class="nav-link " href="#">Modifier</a>
+                            </div>
+                        </div>
+                        <div class="card mx-2 mb-5">
+                            <div class="card-header text-center">Radio Rambler</div>
+                            <div class="card-body d-flex">
+                                <a class="nav-link me-3" href="#">Voir</a>
+                                <a class="nav-link " href="#">Modifier</a>
+                            </div>
+                        </div>
+                        <div class="card mx-2 mb-5">
+                            <div class="card-header text-center">Enceinte The sixes</div>
+                            <div class="card-body d-flex">
+                                <a class="nav-link me-3" href="#">Voir</a>
+                                <a class="nav-link " href="#">Modifier</a>
+                            </div>
+                        </div>                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+{% endblock %}

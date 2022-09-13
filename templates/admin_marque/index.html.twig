@@ -1,0 +1,42 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Marque{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('app_admin_marque_new') }}" class="btn btn-dark my-3">Nouveau</a>
+
+    <h1>Marque</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                {# <th>Catégories</th> #}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for marque in marques %}
+            <tr>
+                <td>{{ marque.id }}</td>
+                <td>{{ marque.nom }}</td>
+                {# <td>{{ marque.categorie.nom }}</td> #}
+                <td>
+                    <a href="{{ path('app_admin_marque_show', {'id': marque.id}) }}"title="Voir" class="btn btn-dark">
+                <i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('app_admin_marque_edit', {'id': marque.id}) }}"title="Modifier" class="btn btn-success ms-2">
+                <i class="align-middle" data-feather="edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune marque trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

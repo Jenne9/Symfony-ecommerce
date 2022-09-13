@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+<div class="section">
+	<div class="container bg-white text-dark">
+        {{ form_start (paiement, {action: path ('app_paiement_confirmer')}) }}
+
+        <div class="row">
+        	<div class="col-md-6 px-5">
+                <div class="heading_s1 pt-5">
+                        <h4 class="text-center">Adresse de livraison</h4>
+                        <div class="content" id="adresse">
+                            {{ form_widget (paiement.adresse) | replace ({'[spr]' : '<br>'})|raw }}
+                        </div>                   
+                </div>
+                <div class="heading_s1 pt-3">
+                    <h4 class="text-center">Transporteurs</h4>
+                    <div class="content pb-2" id="transporteur" >
+                    {{ form_widget (paiement.transporteur) | replace ({'[spr]' : '<br>'})|raw }}
+
+                    </div>
+                </div>
+                <div class="heading_s1 pt-3 pb-5">
+                    <h4 class="text-center">Informations</h4>
+                    <div class="form-group mb-0">
+                        {{ form_widget (paiement.information) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="order_review">
+                    <div class="heading_s1 pt-5 pb-3">
+                        <h4 class="text-center">Commande</h4>
+                    </div>
+                    <div class="table-responsive order_table ">
+                        <table class="table bg-light ">
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+							{% for element in panier.produits %}
+							
+                                    <tr>
+                                        <td> {{element.produit.nom}} <span class="ps-3">X{{element.quantity}}</span></td>                                       
+                                        <td>{{element.produit.prix}} €</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total HT</th>
+                                    <td class="product-subtotal">{{panier.data.sousTotalHT}} €</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>TVA</th>
+                                    <td class="product-subtotal">{{ panier.data.tva}} €</td>
+                                </tr>
+                                <tr>
+                                    <th>Total</th>
+                                    <td class="product-subtotal">{{ panier.data.sousTotalTTC }} €</td>
+                                </tr>
+                            </tfoot>
+                        
+                        </table>
+                    </div>
+                    <div class="payment_method">
+                        <div class="heading_s1">
+                            <h4>Paiement</h4>
+                        </div>
+
+                    </div>
+                    <button type="submit" id="checkout-button" class="btn btn-warning">Commander</button>
+                </div>
+            </div>
+        </div>
+        {{ form_end (paiement)}}
+    </div>
+</div>
+
+
+{% endblock %}

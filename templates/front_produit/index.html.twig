@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FrontProduitController!{% endblock %}
+
+{% block body %}
+{% for produit in produits %}
+<div class="col">{{produit.nom}}</div>
+<div class="col">{{produit.categorie}}</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<main class="container">
+    <div class="row">
+        <img class="img-fluid m-auto pt-5" style="max-width:1200px" src={{ asset ('images/accueil/vintage.png') }}>    
+    </div>
+
+    <div class="row">
+        <h2 class="my-5 text-center text-warning">DECOUVREZ NOTRE LARGE GAMME DE PRODUIT VINTAGE</h2>
+        <div class="col text-center mb-5">Notre gamme est constituée d'appareils photo, d'amplificateurs, de caméras Super 8, d'enceintes, de platines, de radios et de gramophones. Chaque produit bénéficie d’une qualité de fabrication exceptionnelle et d’une personnalité très forte.</div>
+    </div>
+    <div class="row">
+        <h3 class="my-5 text-center text-warning">DERNIERS ARRIVAGES</h2>
+    </div>
+
+    <div class="container row justify-content-center text-dark">
+        {% for produit in produitIsNew %}
+            <div class="card m-3" style="width: 18rem;">
+                <img style="width: 15rem;"  src="{{asset ('images/produits/') ~ produit.imageName }}" class="card-img-top text-center" alt="{{ produit.imageName}}">
+                <div class="card-body">
+                <h5 class="card-title text-center text-warning">{{ produit.categorie }}</h5>
+                <h5 class="card-title text-center">{{ produit.nom }}</h5>
+                <p class="card-text lh">{{produit.description|raw}}</p>
+                <p class="text-center py-1">{{produit.prix}}€</p>
+                <div class="justify-content-center d-flex pt-2">
+                    <a href="{{ path ('app_produit_detail', {'slug':produit.slug})}}" class="btn btn-warning">Plus de détails</a>
+                </div>
+            </div>
+    </div>
+        {% endfor %}
+
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-6 pe-5">
+            <h2 class="my-5 text-center text-warning">NOS CONSEILS ET ASTUCES</h2>
+            <div class="col text-justify mb-5 text-white">Notre gamme de produits étant électronique, requiert une grande attention. Il est    nécessaire et capital que vous suiviez certaines règles afin de bien nettoyer vos appareils. Nous vous proposons toutes une série de conseils et d'astuce rédigée par des professionnels afin que vous puissiez préserver votre matériel électronique le plus longtemps possible.
+            </div>
+            <a href="#">Pour en savoir plus, c'est ici ...</a>
+        </div> 
+
+        <div class="col-sm-12 col-md-6 pe-5">
+            <h2 class="my-5 text-center text-warning ">NOS ATELIERS</h2>
+            <div class="col text-justify mb-5 text-white">Malgré, un bon entretien, il peut arriver qu'un appareil tombe tout de même en panne.
+                Dans ce cas-là, pas de panique ! Nos ateliers partenaires sont là pour vous aider. 
+                Des spécialistes soigneusement sélectionné afin de vous apporter la meilleure expertise possible seront à votre écoute.<br>
+            </div>
+            <a class="#" href="#">Par ici, pour, retrouvez nos ateliers partenaires.</a>  
+        </div>
+    </div>
+
+
+
+</main>
+{% endblock %}

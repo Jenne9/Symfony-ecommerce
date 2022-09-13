@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+
+{% block body %}
+<h1 class="text-center mt-5">Inscription</h1>
+
+<div class="login_register_wrap section">
+    <div class="container text-dark">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-10">
+                <div class="login_wrap">
+            	    <div class="padding_eight_all bg-white">
+                        <div class="message-flash">
+                            {% for flash_error in app.flashes('verify_email_error') %}
+                                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                            {% endfor %}
+                        </div>
+                        {{ form_start(registrationForm, {'attr': {'class':'m-5 py-3'}}) }}
+                            <div class="form-row">
+                                <div class="-col-md-6">
+                                    {{ form_row(registrationForm.nom) }}
+                                
+                                    {{ form_row(registrationForm.prenom) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            {{ form_row(registrationForm.email) }}
+                            </div>
+                            <div class="form-group">
+                            {{ form_row(registrationForm.plainPassword) }}
+                            </div>                           
+                            <div class="login_footer form-group">
+                                <div class="chek-form">
+                                    <div class="custome-checkbox">
+                                        {{ form_row(registrationForm.agreeTerms) }}                                         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-warning" name="register">S'inscrire</button>
+                            </div>
+                        {{ form_end(registrationForm) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
